@@ -5,11 +5,15 @@ class Student < Person
 
   def initialize(classroom, name = 'Unknown', age = nil, parent_permission: true)
     super(name, age, parent_permission: parent_permission)
-    @classroom = classroom
-    classroom.add_student(self)
+    belong_to_classroom(classroom)
   end
 
   def play_hooky
     '¯\\(ツ)/¯'
+  end
+
+  def belong_to_classroom(classroom)
+    self.classroom = classroom
+    classroom.add_student(self)
   end
 end
