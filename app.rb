@@ -53,11 +53,11 @@ class App
   end
 
   def list_books
-    puts 'List of all books:'
+    puts 'List of all books'
     books.each do |book|
-      puts "Title: #{book.title}, Author: #{book.author}"
+      puts "Title: \"#{book.title}\", Author: \"#{book.author}\""
     end
-  end
+  end  
 
   def list_people
     puts 'List of all people:'
@@ -90,10 +90,7 @@ class App
   end
 
   def create_student(name, age, parent_permission)
-    puts "Enter the student's classroom:"
-    classroom = gets.chomp
-
-    student = Student.new(classroom, name, age, parent_permission: parent_permission)
+    student = Student.new(name, age, parent_permission: parent_permission)
     people << student
     puts "Student created with ID: #{student.id}"
   end
@@ -122,23 +119,39 @@ class App
   def create_rental
     puts 'Enter the rental date (YYYY-MM-DD):'
     date = gets.chomp
-
-    puts 'Enter the person ID for the rental:'
-    person_id = gets.chomp.to_i
-
-    person = find_person_by_id(person_id)
-    return if person.nil?
-
-    puts 'Enter the book title for the rental:'
-    book_title = gets.chomp
-
-    book = find_book_by_title(book_title)
+  
+    puts 'Please select a book from the following list by number:'
+    list_books_with_numbers
+    book_number = gets.chomp.to_i
+  
+    book = find_book_by_number(book_number)
     return if book.nil?
-
+  
+    puts 'Please select a person from the following list by number (not ID):'
+    list_people_with_numbers
+    person_number = gets.chomp.to_i
+  
+    person = find_person_by_number(person_number)
+    return if person.nil?
+  
     rental = Rental.new(date, book, person)
     rentals << rental
     puts "Rental created for person ID #{person.id} and book title #{book.title}"
   end
+  
+  def list_books_with_numbers
+    puts 'List of all books:'
+    books.each_with_index do |book, index|
+      puts "#{index + 1}. [Title: \"#{book.title}\", Author: \"#{book.author}\"]"
+    end
+  end
+  
+  def list_people_with_numbers
+    puts 'List of all people:'
+    people.each_with_index do |person, index|
+      puts "#{index + 1}. [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+    end
+  end  
 
   def find_person_by_id(person_id)
     person = people.find { |p| p.id == person_id }
