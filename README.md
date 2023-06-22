@@ -89,6 +89,8 @@ gem install
 
 ## 🔭 Future Features <a name="future-features"></a>
 
+- Unit tests
+- Basic UI
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
