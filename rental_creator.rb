@@ -36,10 +36,9 @@ class RentalCreator
     puts 'Date (yyyy/mm/dd):'
     date_input = gets.chomp
     rental_date = ::Date.parse(date_input)
-  
+
     rental = Rental.new(rental_date, book, person)
     @rentals << rental
     puts 'Rental created successfully.'
   end
-  
 end
