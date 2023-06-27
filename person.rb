@@ -34,4 +34,13 @@ class Person < Nameable
   def generate_id
     rand(1..1000)
   end
+
+  def to_json(*_args)
+    {
+      'name' => name,
+      'age' => age,
+      'parent_permission' => parent_permission?,
+      'type' => self.class.name
+    }
+  end
 end

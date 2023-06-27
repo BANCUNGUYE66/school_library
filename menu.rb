@@ -32,6 +32,7 @@ class Menu
       BookCreator.new(@app.books).create_book
     when 5
       RentalCreator.new(@app.books, @app.people, @app.rentals).create_rental
+      @app.save_data
     when 6
       @app.list_rentals_for_person
     else
