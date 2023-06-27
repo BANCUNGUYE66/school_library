@@ -19,8 +19,6 @@ class Book
     @id_counter += 1
   end
 
-  private
-
   def generate_id
     self.class.increment_id_counter
   end
@@ -30,6 +28,6 @@ class Book
       'title' => title,
       'author' => author,
       'id' => id
-    }
+    }.to_json
   end
 end

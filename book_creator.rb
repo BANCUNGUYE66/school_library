@@ -13,6 +13,8 @@ class BookCreator
 
     book = Book.new(title, author)
     @books << book
+
     puts 'Book created successfully.'
   end
 end
+

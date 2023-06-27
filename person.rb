@@ -40,7 +40,13 @@ class Person < Nameable
       'name' => name,
       'age' => age,
       'parent_permission' => parent_permission?,
-      'type' => self.class.name
+      'type' => self.class.name,
+      'id' => id,
+      'rentals' => rentals.map(&:to_json)
     }
+
+    def to_s
+      "Name: #{@name}, Age: #{@age}, Parent Permission: #{@parent_permission}, Type: #{self.class}, ID: #{@id}"
+    end
   end
 end

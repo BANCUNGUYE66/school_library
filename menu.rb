@@ -3,6 +3,7 @@ require_relative 'people_list'
 require_relative 'person_creator'
 require_relative 'book_creator'
 require_relative 'rental_creator'
+require 'json'
 
 class Menu
   def initialize(app)
@@ -23,13 +24,14 @@ class Menu
   def process_choice(choice)
     case choice
     when 1
-      BookList.new(@app.books).list_all_books
+      puts JSON.pretty_generate(@app.books.map(&:to_json))
     when 2
       PeopleList.new(@app.people).list_all_people
     when 3
       PersonCreator.new(@app.people).create_person
     when 4
       BookCreator.new(@app.books).create_book
+      @app.save_data
     when 5
       RentalCreator.new(@app.books, @app.people, @app.rentals).create_rental
       @app.save_data

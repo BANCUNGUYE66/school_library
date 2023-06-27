@@ -1,5 +1,3 @@
-require_relative 'book'
-
 class BookList
   def initialize(books)
     @books = books
@@ -8,7 +6,7 @@ class BookList
   def list_all_books
     puts 'List of Books:'
     @books.each_with_index do |book, index|
-      puts "#{index + 1}. Title: \"#{book.title}\", Author: \"#{book.author}\""
+      puts "#{index + 1}. #{book.to_json}"
     end
   end
 end
