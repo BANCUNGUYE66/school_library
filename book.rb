@@ -24,4 +24,12 @@ class Book
   def generate_id
     self.class.increment_id_counter
   end
+
+  def to_json(*_args)
+    {
+      'title' => title,
+      'author' => author,
+      'id' => id
+    }
+  end
 end
