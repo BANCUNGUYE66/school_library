@@ -1,1 +1,51 @@
-["#<Person:0x1b8>","#<Person:0x1c8>"]
+[
+  {
+    "name": "reg",
+    "age": 23,
+    "type": "Student",
+    "id": 199,
+    "parent_permission": true
+  },
+  {
+    "name": "wsdg",
+    "age": 32,
+    "type": "Student",
+    "id": 535,
+    "parent_permission": true
+  },
+  {
+    "name": "errt",
+    "age": 54,
+    "type": "Teacher",
+    "id": 978,
+    "specialization": "etrre"
+  },
+  {
+    "name": "dfhg",
+    "age": 67,
+    "type": "Teacher",
+    "id": 197,
+    "specialization": "fgh"
+  },
+  {
+    "name": "dg",
+    "age": 54,
+    "type": "Student",
+    "id": 691,
+    "parent_permission": true
+  },
+  {
+    "name": "dfdf",
+    "age": 32,
+    "type": "Student",
+    "id": 646,
+    "parent_permission": true
+  },
+  {
+    "name": "dffg",
+    "age": 23,
+    "type": "Teacher",
+    "id": 368,
+    "specialization": "gffh"
+  }
+]

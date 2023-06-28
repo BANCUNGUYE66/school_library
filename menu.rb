@@ -24,21 +24,47 @@ class Menu
   def process_choice(choice)
     case choice
     when 1
-      puts JSON.pretty_generate(@app.books.map(&:to_json))
+      list_all_books
     when 2
-      PeopleList.new(@app.people).list_all_people
+      list_all_people
     when 3
-      PersonCreator.new(@app.people).create_person
+      create_person
     when 4
-      BookCreator.new(@app.books).create_book
+      create_book
       @app.save_data
     when 5
-      RentalCreator.new(@app.books, @app.people, @app.rentals).create_rental
+      create_rental
       @app.save_data
     when 6
-      @app.list_rentals_for_person
+      list_rentals_for_person
     else
       puts 'Invalid choice. Please try again.'
     end
+  end
+
+  private
+
+  def list_all_books
+    puts JSON.pretty_generate(@app.books.map(&:to_json))
+  end
+
+  def list_all_people
+    PeopleList.new(@app.people).list_all_people
+  end
+
+  def create_person
+    PersonCreator.new(@app.people).create_person
+  end
+
+  def create_book
+    BookCreator.new(@app.books).create_book
+  end
+
+  def create_rental
+    RentalCreator.new(@app.books, @app.people, @app.rentals).create_rental
+  end
+
+  def list_rentals_for_person
+    @app.list_rentals_for_person
   end
 end

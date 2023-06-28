@@ -17,4 +17,3 @@ class BookCreator
     puts 'Book created successfully.'
   end
 end
-

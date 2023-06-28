@@ -1,6 +1,7 @@
 require_relative 'person'
 require_relative 'student'
 require_relative 'teacher'
+require 'json'
 
 class PersonCreator
   def initialize(people)
@@ -27,6 +28,8 @@ class PersonCreator
       return
     end
 
+    save_people_to_file # Save the updated people list to "people.json"
+
     puts 'Person created successfully.'
   end
 
@@ -46,5 +49,21 @@ class PersonCreator
 
     teacher = Teacher.new(name, age, specialization)
     @people << teacher
+  end
+
+  def save_people_to_file
+    people_data = @people.map do |person|
+      data = {
+        'name' => person.name,
+        'age' => person.age,
+        'type' => person.class.name,
+        'id' => person.id
+      }
+      data['parent_permission'] = person.parent_permission if person.is_a?(Student)
+      data['specialization'] = person.specialization if person.is_a?(Teacher)
+      data
+    end
+
+    File.write('people.json', JSON.pretty_generate(people_data))
   end
 end

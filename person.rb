@@ -37,16 +37,24 @@ class Person < Nameable
 
   def to_json(*_args)
     {
-      'name' => name,
-      'age' => age,
-      'parent_permission' => parent_permission?,
+      'name' => @name,
+      'age' => @age,
+      'parent_permission' => @parent_permission,
       'type' => self.class.name,
-      'id' => id,
+      'id' => @id,
       'rentals' => rentals.map(&:to_json)
-    }
+    }.to_json
+  end
 
-    def to_s
-      "Name: #{@name}, Age: #{@age}, Parent Permission: #{@parent_permission}, Type: #{self.class}, ID: #{@id}"
-    end
+  def to_s
+    json_data = {
+      'name' => @name,
+      'age' => @age,
+      'parent_permission' => @parent_permission,
+      'type' => self.class.name,
+      'id' => @id
+    }
+    json_data['specialization'] = @specialization if is_a?(Teacher)
+    json_data.to_json
   end
 end

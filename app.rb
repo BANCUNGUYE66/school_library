@@ -90,14 +90,28 @@ class App
   end
 
   def save_people
-    File.write('people.json', JSON.generate(people))
+    people_data = people.map do |person|
+      data = {
+        'name' => person.name,
+        'age' => person.age,
+        'type' => person.class.name,
+        'id' => person.id
+      }
+      data['parent_permission'] = person.parent_permission if person.is_a?(Student)
+      data['specialization'] = person.specialization if person.is_a?(Teacher)
+      data
+    end
+
+    File.write('people.json', JSON.pretty_generate(people_data))
   end
 
   def load_people
     return unless File.exist?('people.json')
 
     people_data = File.read('people.json')
-    @people = JSON.parse(people_data).map do |person_data|
+    people_array = JSON.parse(people_data)
+
+    @people = people_array.map do |person_data|
       if person_data['type'] == 'Student'
         Student.new(person_data['name'], person_data['age'], parent_permission: person_data['parent_permission'])
       elsif person_data['type'] == 'Teacher'
@@ -110,14 +124,14 @@ class App
   end
 
   def save_rentals
-    File.write('rentals.json', JSON.pretty_generate(@rentals.map(&:to_json)))
+    rentals_data = @rentals.map(&:to_json)
+    File.write('rentals.json', JSON.pretty_generate(rentals_data))
   end
 
   def load_rentals
     return unless File.exist?('rentals.json')
 
     rentals_data = File.read('rentals.json')
-
     begin
       rentals_json = JSON.parse(rentals_data)
       @rentals = rentals_json.map do |rental_data|
