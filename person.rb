@@ -25,16 +25,6 @@ class Person < Nameable
     rentals << rental
   end
 
-  private
-
-  def of_age?
-    @age && @age >= 18
-  end
-
-  def generate_id
-    rand(1..1000)
-  end
-
   def to_json(*_args)
     {
       'name' => @name,
@@ -54,7 +44,16 @@ class Person < Nameable
       'type' => self.class.name,
       'id' => @id
     }
-    json_data['specialization'] = @specialization if is_a?(Teacher)
-    json_data.to_json
+    json_data.to_s
+  end
+
+  private
+
+  def of_age?
+    @age && @age >= 18
+  end
+
+  def generate_id
+    rand(1..1000)
   end
 end

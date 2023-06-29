@@ -11,9 +11,9 @@ class Rental
 
   def to_json(*_args)
     {
-      'date' => date,
       'book_id' => book.id,
+      'date' => date,
       'person_id' => person.id
-    }
+    }.to_json
   end
 end
